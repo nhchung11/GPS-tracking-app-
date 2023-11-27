@@ -21,15 +21,21 @@ namespace MyApp
     public partial class Form1 : Form
     {
         GMap.NET.WindowsForms.GMapControl gmap;
+        GMapOverlay markersOverlay;
+
         string waypoint_latitude;
         string waypoint_longitude;
         string current_latitude;
         string current_longitude;
         double compass_angle = 0;
+        bool loc1_check = false;
+        bool loc2_check = false;    
+        bool loc3_check = false;
+        bool loc4_check = false;    
+        bool loc5_check = false;
         public Form1()
         {
             InitializeComponent();
-            
         }
         private void Gmap_MouseClick(object sender, MouseEventArgs e)
         {
@@ -42,6 +48,9 @@ namespace MyApp
             gmap.Dock = DockStyle.Fill;
             gmap.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
+
+            markersOverlay = new GMapOverlay("markers");
+            gmap.Overlays.Add(markersOverlay);
             string[] ports = SerialPort.GetPortNames();
             comboBox_port.Items.AddRange(ports);
             gmap.ShowCenter = false;
@@ -81,13 +90,43 @@ namespace MyApp
             {
                 string lat = Convert.ToString(gmap.FromLocalToLatLng(e.X, e.Y).Lat);
                 string lon = Convert.ToString(gmap.FromLocalToLatLng(e.X, e.Y).Lng);
-                waypoint1_text.Text = lat + ";" + lon;
-                GMapMarker marker = new GMarkerGoogle(new PointLatLng(Convert.ToDouble(lat), Convert.ToDouble(lon)), GMarkerGoogleType.blue_pushpin);
-                GMapOverlay overlays = new GMapOverlay("markers");
-                overlays.Markers.Add(marker);
-                gmap.Overlays.Clear();
-                gmap.Overlays.Add(overlays);
-                gmap.Refresh();
+                if (loc1_check == false)
+                {
+                    waypoint1_text.Text = lat + ";" + lon;
+                }
+                else
+                {
+                    waypoint1_text.Enabled = false;
+                    if (loc2_check == false)
+                    {
+                        waypoint2_text.Text = lat + ";" + lon;
+                    }
+                    else
+                    {
+                        waypoint2_text.Enabled = false;
+                        if (loc3_check == false)
+                        {
+                            waypoint3_text.Text = lat + ";" + lon;
+                        }
+                        else
+                        {
+                            waypoint3_text.Enabled = false;
+                            if (loc4_check == false)
+                            {
+                                waypoint4_text.Text = lat + ";" + lon;
+                            }
+                            else
+                            {
+                                waypoint4_text.Enabled = false;
+                                waypoint5_text.Text = lat + ";" + lon;
+                                if (loc5_check == true)
+                                {
+                                    waypoint5_text.Enabled = false;
+                                }    
+                            }
+                        }
+                    }    
+                }
             }
         }
         private void disconnect_btn_Click(object sender, EventArgs e)
@@ -157,12 +196,11 @@ namespace MyApp
             string[] loc = waypoint1_text.Text.Split(';');
             double lat = Convert.ToDouble(loc[0]);
             double lon = Convert.ToDouble(loc[1]);
-            GMapMarker marker = new GMarkerGoogle(new PointLatLng(lat, lon), GMarkerGoogleType.red); ;
-            GMapOverlay overlays = new GMapOverlay("markers");
-            overlays.Markers.Add(marker);
-            gmap.Overlays.Clear();
-            gmap.Overlays.Add(overlays);
-            gmap.Refresh();
+            GMapMarker marker = new GMarkerGoogle(new PointLatLng(lat, lon), GMarkerGoogleType.red); 
+            markersOverlay.Markers.Add(marker);
+            gmap.Zoom += 1;
+            gmap.Zoom -= 1;
+            loc1_check = true;
             
         }
 
@@ -171,12 +209,11 @@ namespace MyApp
             string[] loc = waypoint2_text.Text.Split(';');
             double lat = Convert.ToDouble(loc[0]);
             double lon = Convert.ToDouble(loc[1]);
-            GMapMarker marker = new GMarkerGoogle(new PointLatLng(lat, lon), GMarkerGoogleType.red); ;
-            GMapOverlay overlays = new GMapOverlay("markers");
-            overlays.Markers.Add(marker);
-            gmap.Overlays.Clear();
-            gmap.Overlays.Add(overlays);
-            gmap.Refresh();
+            GMapMarker marker = new GMarkerGoogle(new PointLatLng(lat, lon), GMarkerGoogleType.red);
+            markersOverlay.Markers.Add(marker);
+            gmap.Zoom += 1;
+            gmap.Zoom -= 1;
+            loc2_check = true;
         }
 
         private void add3_Click(object sender, EventArgs e)
@@ -185,11 +222,10 @@ namespace MyApp
             double lat = Convert.ToDouble(loc[0]);
             double lon = Convert.ToDouble(loc[1]);
             GMapMarker marker = new GMarkerGoogle(new PointLatLng(lat, lon), GMarkerGoogleType.red); ;
-            GMapOverlay overlays = new GMapOverlay("markers");
-            overlays.Markers.Add(marker);
-            gmap.Overlays.Clear();
-            gmap.Overlays.Add(overlays);
-            gmap.Refresh();
+            markersOverlay.Markers.Add(marker);
+            gmap.Zoom += 1;
+            gmap.Zoom -= 1;
+            loc3_check = true;
         }
 
         private void add4_Click(object sender, EventArgs e)
@@ -198,11 +234,10 @@ namespace MyApp
             double lat = Convert.ToDouble(loc[0]);
             double lon = Convert.ToDouble(loc[1]);
             GMapMarker marker = new GMarkerGoogle(new PointLatLng(lat, lon), GMarkerGoogleType.red); ;
-            GMapOverlay overlays = new GMapOverlay("markers");
-            overlays.Markers.Add(marker);
-            gmap.Overlays.Clear();
-            gmap.Overlays.Add(overlays);
-            gmap.Refresh();
+            markersOverlay.Markers.Add(marker);
+            gmap.Zoom += 1;
+            gmap.Zoom -= 1;
+            loc4_check = true;  
         }
 
         private void add5_Click(object sender, EventArgs e)
@@ -211,11 +246,95 @@ namespace MyApp
             double lat = Convert.ToDouble(loc[0]);
             double lon = Convert.ToDouble(loc[1]);
             GMapMarker marker = new GMarkerGoogle(new PointLatLng(lat, lon), GMarkerGoogleType.red); ;
-            GMapOverlay overlays = new GMapOverlay("markers");
-            overlays.Markers.Add(marker);
-            gmap.Overlays.Clear();
-            gmap.Overlays.Add(overlays);
-            gmap.Refresh();
+            markersOverlay.Markers.Add(marker);
+            gmap.Zoom += 1;
+            gmap.Zoom -= 1;
+            loc5_check = true;  
+        }
+
+        private void del1_Click(object sender, EventArgs e)
+        {
+            if (markersOverlay.Markers.Count > 0)
+            {
+                // Remove the last marker in the overlay
+                markersOverlay.Markers.RemoveAt(markersOverlay.Markers.Count - 1);
+                waypoint1.Text = null;
+                waypoint1_text.Enabled = true;
+                loc1_check = false;
+            }
+        }
+
+        private void del2_Click(object sender, EventArgs e)
+        {
+            if (markersOverlay.Markers.Count > 0)
+            {
+                // Remove the last marker in the overlay
+                markersOverlay.Markers.RemoveAt(markersOverlay.Markers.Count - 1);
+                waypoint2_text.Text = null;
+                waypoint2_text.Enabled = true;
+                loc2_check = false;
+            }
+        }
+
+        private void del3_Click(object sender, EventArgs e)
+        {
+            if (markersOverlay.Markers.Count > 0)
+            {
+                // Remove the last marker in the overlay
+                markersOverlay.Markers.RemoveAt(markersOverlay.Markers.Count - 1);
+                waypoint3_text.Text = null;
+                waypoint3_text.Enabled = true;
+                loc3_check = false;
+            }
+        }
+
+        private void del4_Click(object sender, EventArgs e)
+        {
+            if (markersOverlay.Markers.Count > 0)
+            {
+                // Remove the last marker in the overlay
+                markersOverlay.Markers.RemoveAt(markersOverlay.Markers.Count - 1);
+                waypoint4_text.Text = null;
+                waypoint4_text.Enabled = true;
+                loc4_check = false;
+            }
+        }
+
+        private void del5_Click(object sender, EventArgs e)
+        {
+            if (markersOverlay.Markers.Count > 0)
+            {
+                // Remove the last marker in the overlay
+                markersOverlay.Markers.RemoveAt(markersOverlay.Markers.Count - 1);
+                waypoint5_text.Text = null;
+                waypoint5_text.Enabled = true; 
+                loc5_check = false;
+            }
+        }
+
+        private void allwaypoint_del_Click(object sender, EventArgs e)
+        {
+            markersOverlay.Markers.Clear();
+
+            waypoint1.Text = null;
+            waypoint1_text.Enabled = true;
+            loc1_check = false;
+
+            waypoint2_text.Text = null;
+            waypoint2_text.Enabled = true;
+            loc2_check = false;
+
+            waypoint3_text.Text = null;
+            waypoint3_text.Enabled = true;
+            loc3_check = false;
+
+            waypoint4_text.Text = null;
+            waypoint4_text.Enabled = true;
+            loc4_check = false;
+
+            waypoint5_text.Text = null;
+            waypoint5_text.Enabled = true;
+            loc5_check = false;
         }
     }
 }

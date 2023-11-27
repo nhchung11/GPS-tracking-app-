@@ -47,11 +47,11 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.del5 = new System.Windows.Forms.Button();
-            this.del4 = new System.Windows.Forms.Button();
-            this.del3 = new System.Windows.Forms.Button();
-            this.del2 = new System.Windows.Forms.Button();
-            this.del1 = new System.Windows.Forms.Button();
+            this.waypoint5_del = new System.Windows.Forms.Button();
+            this.waypoint4_del = new System.Windows.Forms.Button();
+            this.waypoint3_del = new System.Windows.Forms.Button();
+            this.waypoint2_del = new System.Windows.Forms.Button();
+            this.waypoint1_del = new System.Windows.Forms.Button();
             this.add5 = new System.Windows.Forms.Button();
             this.add4 = new System.Windows.Forms.Button();
             this.add3 = new System.Windows.Forms.Button();
@@ -63,7 +63,7 @@
             this.waypoint4 = new System.Windows.Forms.Label();
             this.waypoint3_text = new System.Windows.Forms.TextBox();
             this.waypoint3 = new System.Windows.Forms.Label();
-            this.delete_btn = new System.Windows.Forms.Button();
+            this.allwaypoint_del = new System.Windows.Forms.Button();
             this.add_btn = new System.Windows.Forms.Button();
             this.waypoint1_text = new System.Windows.Forms.TextBox();
             this.waypoint2_text = new System.Windows.Forms.TextBox();
@@ -245,11 +245,11 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.del5);
-            this.groupBox2.Controls.Add(this.del4);
-            this.groupBox2.Controls.Add(this.del3);
-            this.groupBox2.Controls.Add(this.del2);
-            this.groupBox2.Controls.Add(this.del1);
+            this.groupBox2.Controls.Add(this.waypoint5_del);
+            this.groupBox2.Controls.Add(this.waypoint4_del);
+            this.groupBox2.Controls.Add(this.waypoint3_del);
+            this.groupBox2.Controls.Add(this.waypoint2_del);
+            this.groupBox2.Controls.Add(this.waypoint1_del);
             this.groupBox2.Controls.Add(this.add5);
             this.groupBox2.Controls.Add(this.add4);
             this.groupBox2.Controls.Add(this.add3);
@@ -261,7 +261,7 @@
             this.groupBox2.Controls.Add(this.waypoint4);
             this.groupBox2.Controls.Add(this.waypoint3_text);
             this.groupBox2.Controls.Add(this.waypoint3);
-            this.groupBox2.Controls.Add(this.delete_btn);
+            this.groupBox2.Controls.Add(this.allwaypoint_del);
             this.groupBox2.Controls.Add(this.add_btn);
             this.groupBox2.Controls.Add(this.waypoint1_text);
             this.groupBox2.Controls.Add(this.waypoint2_text);
@@ -274,50 +274,55 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Set waypoint";
             // 
-            // del5
+            // waypoint5_del
             // 
-            this.del5.Location = new System.Drawing.Point(282, 220);
-            this.del5.Name = "del5";
-            this.del5.Size = new System.Drawing.Size(26, 23);
-            this.del5.TabIndex = 27;
-            this.del5.Text = "-";
-            this.del5.UseVisualStyleBackColor = true;
+            this.waypoint5_del.Location = new System.Drawing.Point(282, 220);
+            this.waypoint5_del.Name = "waypoint5_del";
+            this.waypoint5_del.Size = new System.Drawing.Size(26, 23);
+            this.waypoint5_del.TabIndex = 27;
+            this.waypoint5_del.Text = "-";
+            this.waypoint5_del.UseVisualStyleBackColor = true;
+            this.waypoint5_del.Click += new System.EventHandler(this.del5_Click);
             // 
-            // del4
+            // waypoint4_del
             // 
-            this.del4.Location = new System.Drawing.Point(282, 183);
-            this.del4.Name = "del4";
-            this.del4.Size = new System.Drawing.Size(26, 23);
-            this.del4.TabIndex = 26;
-            this.del4.Text = "-";
-            this.del4.UseVisualStyleBackColor = true;
+            this.waypoint4_del.Location = new System.Drawing.Point(282, 183);
+            this.waypoint4_del.Name = "waypoint4_del";
+            this.waypoint4_del.Size = new System.Drawing.Size(26, 23);
+            this.waypoint4_del.TabIndex = 26;
+            this.waypoint4_del.Text = "-";
+            this.waypoint4_del.UseVisualStyleBackColor = true;
+            this.waypoint4_del.Click += new System.EventHandler(this.del4_Click);
             // 
-            // del3
+            // waypoint3_del
             // 
-            this.del3.Location = new System.Drawing.Point(282, 143);
-            this.del3.Name = "del3";
-            this.del3.Size = new System.Drawing.Size(26, 23);
-            this.del3.TabIndex = 25;
-            this.del3.Text = "-";
-            this.del3.UseVisualStyleBackColor = true;
+            this.waypoint3_del.Location = new System.Drawing.Point(282, 143);
+            this.waypoint3_del.Name = "waypoint3_del";
+            this.waypoint3_del.Size = new System.Drawing.Size(26, 23);
+            this.waypoint3_del.TabIndex = 25;
+            this.waypoint3_del.Text = "-";
+            this.waypoint3_del.UseVisualStyleBackColor = true;
+            this.waypoint3_del.Click += new System.EventHandler(this.del3_Click);
             // 
-            // del2
+            // waypoint2_del
             // 
-            this.del2.Location = new System.Drawing.Point(282, 106);
-            this.del2.Name = "del2";
-            this.del2.Size = new System.Drawing.Size(26, 23);
-            this.del2.TabIndex = 24;
-            this.del2.Text = "-";
-            this.del2.UseVisualStyleBackColor = true;
+            this.waypoint2_del.Location = new System.Drawing.Point(282, 106);
+            this.waypoint2_del.Name = "waypoint2_del";
+            this.waypoint2_del.Size = new System.Drawing.Size(26, 23);
+            this.waypoint2_del.TabIndex = 24;
+            this.waypoint2_del.Text = "-";
+            this.waypoint2_del.UseVisualStyleBackColor = true;
+            this.waypoint2_del.Click += new System.EventHandler(this.del2_Click);
             // 
-            // del1
+            // waypoint1_del
             // 
-            this.del1.Location = new System.Drawing.Point(283, 66);
-            this.del1.Name = "del1";
-            this.del1.Size = new System.Drawing.Size(26, 23);
-            this.del1.TabIndex = 23;
-            this.del1.Text = "-";
-            this.del1.UseVisualStyleBackColor = true;
+            this.waypoint1_del.Location = new System.Drawing.Point(283, 66);
+            this.waypoint1_del.Name = "waypoint1_del";
+            this.waypoint1_del.Size = new System.Drawing.Size(26, 23);
+            this.waypoint1_del.TabIndex = 23;
+            this.waypoint1_del.Text = "-";
+            this.waypoint1_del.UseVisualStyleBackColor = true;
+            this.waypoint1_del.Click += new System.EventHandler(this.del1_Click);
             // 
             // add5
             // 
@@ -417,14 +422,15 @@
             this.waypoint3.TabIndex = 12;
             this.waypoint3.Text = "Waypoint 3";
             // 
-            // delete_btn
+            // allwaypoint_del
             // 
-            this.delete_btn.Location = new System.Drawing.Point(10, 253);
-            this.delete_btn.Name = "delete_btn";
-            this.delete_btn.Size = new System.Drawing.Size(75, 23);
-            this.delete_btn.TabIndex = 11;
-            this.delete_btn.Text = "Delete";
-            this.delete_btn.UseVisualStyleBackColor = true;
+            this.allwaypoint_del.Location = new System.Drawing.Point(10, 253);
+            this.allwaypoint_del.Name = "allwaypoint_del";
+            this.allwaypoint_del.Size = new System.Drawing.Size(75, 23);
+            this.allwaypoint_del.TabIndex = 11;
+            this.allwaypoint_del.Text = "Delete";
+            this.allwaypoint_del.UseVisualStyleBackColor = true;
+            this.allwaypoint_del.Click += new System.EventHandler(this.allwaypoint_del_Click);
             // 
             // add_btn
             // 
@@ -521,7 +527,7 @@
         private System.Windows.Forms.Button disconnect_btn;
         private System.Windows.Forms.TextBox data_receive_text;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button delete_btn;
+        private System.Windows.Forms.Button allwaypoint_del;
         private System.Windows.Forms.PictureBox compass_picturebox;
         private System.Windows.Forms.GroupBox compass_groupbox;
         private System.Windows.Forms.TextBox waypoint3_text;
@@ -530,11 +536,11 @@
         private System.Windows.Forms.TextBox waypoint5_text;
         private System.Windows.Forms.Label waypoint5;
         private System.Windows.Forms.TextBox waypoint4_text;
-        private System.Windows.Forms.Button del5;
-        private System.Windows.Forms.Button del4;
-        private System.Windows.Forms.Button del3;
-        private System.Windows.Forms.Button del2;
-        private System.Windows.Forms.Button del1;
+        private System.Windows.Forms.Button waypoint5_del;
+        private System.Windows.Forms.Button waypoint4_del;
+        private System.Windows.Forms.Button waypoint3_del;
+        private System.Windows.Forms.Button waypoint2_del;
+        private System.Windows.Forms.Button waypoint1_del;
         private System.Windows.Forms.Button add5;
         private System.Windows.Forms.Button add4;
         private System.Windows.Forms.Button add3;
