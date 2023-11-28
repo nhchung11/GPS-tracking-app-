@@ -14,6 +14,7 @@ using System.IO.Ports;
 using MyApp;
 using GMap.NET.Internals;
 using GMap.NET.WindowsForms.Markers;
+using System.Threading;
 
 namespace MyApp
 {
@@ -22,6 +23,7 @@ namespace MyApp
     {
         GMap.NET.WindowsForms.GMapControl gmap;
         GMapOverlay markersOverlay;
+
 
         string waypoint_latitude;
         string waypoint_longitude;
@@ -36,11 +38,13 @@ namespace MyApp
         public Form1()
         {
             InitializeComponent();
+
         }
         private void Gmap_MouseClick(object sender, MouseEventArgs e)
         {
             throw new NotImplementedException();
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             gmap = new GMap.NET.WindowsForms.GMapControl();
@@ -48,7 +52,7 @@ namespace MyApp
             gmap.Dock = DockStyle.Fill;
             gmap.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
-
+            
             markersOverlay = new GMapOverlay("markers");
             gmap.Overlays.Add(markersOverlay);
             string[] ports = SerialPort.GetPortNames();
@@ -63,12 +67,13 @@ namespace MyApp
             gmap.MouseClick += MyApp_Mouseclick;
             gmap.Position = new PointLatLng(21, 105);
             compass_picturebox.Image = Compass.DrawCompass(145, 0, 80, 0, 80, compass_picturebox.Size);
+            
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             waypoint_latitude = textBox1.Text;
         }
-
+        
         private void goto_btn_Click(object sender, EventArgs e)
         {
             gmap.Position = new PointLatLng(Convert.ToDouble(21), Convert.ToDouble(105));
@@ -149,9 +154,12 @@ namespace MyApp
                 {
                     serialPort.PortName = comboBox_port.Text;
                     serialPort.Open();
+                    serialPort.BaudRate = 9600;
                     connect_to_device_btn.Enabled = false;
                     disconnect_btn.Enabled = true;
                     MessageBox.Show("Success");
+                    serialPort.Write("a");
+                    
                 }
                 catch(Exception ex) 
                 {
@@ -189,6 +197,20 @@ namespace MyApp
 
         private void add_btn_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (serialPort.IsOpen)
+                {
+                    serialPort.Write("a");
+                    Thread.Sleep(1000);
+                    serialPort.Write("b");
+                    Thread.Sleep(1000);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error sending command to Arduino: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void add1_Click(object sender, EventArgs e)
@@ -203,7 +225,7 @@ namespace MyApp
             loc1_check = true;
             
         }
-
+        
         private void add2_Click(object sender, EventArgs e)
         {
             string[] loc = waypoint2_text.Text.Split(';');
@@ -316,7 +338,7 @@ namespace MyApp
         {
             markersOverlay.Markers.Clear();
 
-            waypoint1.Text = null;
+            waypoint1_text.Text = null;
             waypoint1_text.Enabled = true;
             loc1_check = false;
 
