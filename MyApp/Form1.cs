@@ -236,6 +236,18 @@ namespace MyApp
             gmap.Zoom += 1;
             gmap.Zoom -= 1;
             loc2_check = true;
+            if (!string.IsNullOrWhiteSpace(waypoint1_text.Text))
+            {
+                string[] loc2 = waypoint1_text.Text.Split(';');
+                double lat2 = Convert.ToDouble(loc2[0]);
+                double lon2 = Convert.ToDouble(loc2[1]);
+                GMapRoute route = new GMapRoute(new PointLatLng[] { new PointLatLng(lat, lon), new PointLatLng(lat2, lon2) }, "MyRoute");
+                route.Stroke = new Pen(System.Drawing.Color.Red, 2); // Màu và độ rộng của đường thẳng
+
+                // Thêm đường thẳng vào overlay
+                markersOverlay.Routes.Add(route);   
+            } 
+                
         }
 
         private void add3_Click(object sender, EventArgs e)
@@ -248,6 +260,17 @@ namespace MyApp
             gmap.Zoom += 1;
             gmap.Zoom -= 1;
             loc3_check = true;
+            if (!string.IsNullOrWhiteSpace(waypoint2_text.Text))
+            {
+                string[] loc2 = waypoint2_text.Text.Split(';');
+                double lat2 = Convert.ToDouble(loc2[0]);
+                double lon2 = Convert.ToDouble(loc2[1]);
+                GMapRoute route = new GMapRoute(new PointLatLng[] { new PointLatLng(lat, lon), new PointLatLng(lat2, lon2) }, "MyRoute");
+                route.Stroke = new Pen(System.Drawing.Color.Red, 2); // Màu và độ rộng của đường thẳng
+
+                // Thêm đường thẳng vào overlay
+                markersOverlay.Routes.Add(route);
+            }
         }
 
         private void add4_Click(object sender, EventArgs e)
@@ -259,7 +282,18 @@ namespace MyApp
             markersOverlay.Markers.Add(marker);
             gmap.Zoom += 1;
             gmap.Zoom -= 1;
-            loc4_check = true;  
+            loc4_check = true;
+            if (!string.IsNullOrWhiteSpace(waypoint3_text.Text))
+            {
+                string[] loc2 = waypoint3_text.Text.Split(';');
+                double lat2 = Convert.ToDouble(loc2[0]);
+                double lon2 = Convert.ToDouble(loc2[1]);
+                GMapRoute route = new GMapRoute(new PointLatLng[] { new PointLatLng(lat, lon), new PointLatLng(lat2, lon2) }, "MyRoute");
+                route.Stroke = new Pen(System.Drawing.Color.Red, 2); // Màu và độ rộng của đường thẳng
+
+                // Thêm đường thẳng vào overlay
+                markersOverlay.Routes.Add(route);
+            }
         }
 
         private void add5_Click(object sender, EventArgs e)
@@ -271,7 +305,18 @@ namespace MyApp
             markersOverlay.Markers.Add(marker);
             gmap.Zoom += 1;
             gmap.Zoom -= 1;
-            loc5_check = true;  
+            loc5_check = true;
+            if (!string.IsNullOrWhiteSpace(waypoint4_text.Text))
+            {
+                string[] loc2 = waypoint4_text.Text.Split(';');
+                double lat2 = Convert.ToDouble(loc2[0]);
+                double lon2 = Convert.ToDouble(loc2[1]);
+                GMapRoute route = new GMapRoute(new PointLatLng[] { new PointLatLng(lat, lon), new PointLatLng(lat2, lon2) }, "MyRoute");
+                route.Stroke = new Pen(System.Drawing.Color.Red, 2); // Màu và độ rộng của đường thẳng
+
+                // Thêm đường thẳng vào overlay
+                markersOverlay.Routes.Add(route);
+            }
         }
 
         private void del1_Click(object sender, EventArgs e)
@@ -295,6 +340,7 @@ namespace MyApp
                 waypoint2_text.Text = null;
                 waypoint2_text.Enabled = true;
                 loc2_check = false;
+                markersOverlay.Routes.RemoveAt(markersOverlay.Routes.Count - 1);
             }
         }
 
@@ -307,6 +353,7 @@ namespace MyApp
                 waypoint3_text.Text = null;
                 waypoint3_text.Enabled = true;
                 loc3_check = false;
+                markersOverlay.Routes.RemoveAt(markersOverlay.Routes.Count - 1);
             }
         }
 
@@ -319,6 +366,7 @@ namespace MyApp
                 waypoint4_text.Text = null;
                 waypoint4_text.Enabled = true;
                 loc4_check = false;
+                markersOverlay.Routes.RemoveAt(markersOverlay.Routes.Count - 1);
             }
         }
 
@@ -331,12 +379,14 @@ namespace MyApp
                 waypoint5_text.Text = null;
                 waypoint5_text.Enabled = true; 
                 loc5_check = false;
+                markersOverlay.Routes.RemoveAt(markersOverlay.Routes.Count - 1);
             }
         }
 
         private void allwaypoint_del_Click(object sender, EventArgs e)
         {
             markersOverlay.Markers.Clear();
+            markersOverlay.Routes.Clear();
 
             waypoint1_text.Text = null;
             waypoint1_text.Enabled = true;
@@ -357,6 +407,7 @@ namespace MyApp
             waypoint5_text.Text = null;
             waypoint5_text.Enabled = true;
             loc5_check = false;
+
         }
     }
 }
