@@ -15,10 +15,11 @@ using MyApp;
 using GMap.NET.Internals;
 using GMap.NET.WindowsForms.Markers;
 using System.Threading;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MyApp
 {
-    delegate void serialCallback(string val);
+
     public partial class Form1 : Form
     {
         GMap.NET.WindowsForms.GMapControl gmap;
@@ -43,6 +44,8 @@ namespace MyApp
         bool loc3_check = false;
         bool loc4_check = false;    
         bool loc5_check = false;
+
+        private string previousData = string.Empty;
         public Form1()
         {
             InitializeComponent();
@@ -55,6 +58,7 @@ namespace MyApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
             gmap = new GMap.NET.WindowsForms.GMapControl();
             gmap.MapProvider = GMap.NET.MapProviders.GMapProviders.GoogleMap;
             gmap.Dock = DockStyle.Fill;
@@ -85,6 +89,8 @@ namespace MyApp
             moveTimer = new System.Windows.Forms.Timer();
             moveTimer.Interval = 100; // 0.1 giây
             moveTimer.Tick += MoveMarkerStep;
+
+            serialPort.DataReceived += serialPort_DataReceived_1;
         }
         private void MoveMarkerStep(object sender, EventArgs e)
         {
@@ -124,10 +130,6 @@ namespace MyApp
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            waypoint_latitude = textBox1.Text;
-        }
         
         private void goto_btn_Click(object sender, EventArgs e)
         {
@@ -140,12 +142,27 @@ namespace MyApp
             }
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void serialPort_DataReceived_1(object sender, SerialDataReceivedEventArgs e)
         {
-            
+            try
+            {
+                // Read the entire line of data from the serial port
+                string receivedData = serialPort.ReadLine();
+                string[] loc = receivedData.Split(' ');
+                // Update the TextBox on the UI thread
+                Invoke((MethodInvoker)delegate
+                {
+                    // Process or display the received data as needed
+                    current_lon.Text = loc[1];
+                    current_lat.Text = loc[0];
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading data: {ex.Message}");
+            }
         }
 
-        
 
         private void MyApp_Mouseclick(object sender, MouseEventArgs e)
         {
@@ -203,8 +220,6 @@ namespace MyApp
             }
         }
         
-
-
         private void connect_to_device_btn_Click(object sender, EventArgs e)
         {
             if (!serialPort.IsOpen)
@@ -224,33 +239,6 @@ namespace MyApp
                     MessageBox.Show(ex.Message);
                 }
             }
-        }
-
-        private void serialPort_DataReceived_1(object sender, SerialDataReceivedEventArgs e)
-        {
-            string data_receive = serialPort.ReadLine();
-            set_text(data_receive);
-            //data_receive_text.Invoke((MethodInvoker)delegate
-            //{
-            //    data_receive_text.AppendText(data_receive + Environment.NewLine);
-            //});
-        }
-        private void set_text(string text)
-        {
-            if (this.data_receive_text.InvokeRequired)
-            {
-                serialCallback scb = new serialCallback(set_text);
-                this.Invoke(scb, new object[] {text});
-            }
-            else
-            {
-                string[] loc = text.Split(' ');
-                current_latitude = loc[0];
-                current_longitude = loc[1];
-                //data_receive_text.Text = text;
-                textBox1.Text = current_latitude;
-                textBox2.Text = current_longitude;
-            }    
         }
 
         private void add_btn_Click(object sender, EventArgs e)
@@ -493,6 +481,11 @@ namespace MyApp
             waypoint5_text.Text = null;
             waypoint5_text.Enabled = true;
             loc5_check = false;
+
+        }
+
+        private void data_receive_text_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

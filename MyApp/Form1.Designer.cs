@@ -44,8 +44,8 @@
             this.goto_btn = new System.Windows.Forms.Button();
             this.longitude_textbox = new System.Windows.Forms.Label();
             this.latitude_textbox = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.current_lat = new System.Windows.Forms.TextBox();
+            this.current_lon = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.waypoint5_del = new System.Windows.Forms.Button();
             this.waypoint4_del = new System.Windows.Forms.Button();
@@ -146,8 +146,8 @@
             this.groupBox1.Controls.Add(this.goto_btn);
             this.groupBox1.Controls.Add(this.longitude_textbox);
             this.groupBox1.Controls.Add(this.latitude_textbox);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.current_lat);
+            this.groupBox1.Controls.Add(this.current_lon);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(315, 245);
@@ -198,6 +198,7 @@
             this.data_receive_text.Name = "data_receive_text";
             this.data_receive_text.Size = new System.Drawing.Size(294, 22);
             this.data_receive_text.TabIndex = 12;
+            this.data_receive_text.TextChanged += new System.EventHandler(this.data_receive_text_TextChanged);
             // 
             // goto_btn
             // 
@@ -227,21 +228,19 @@
             this.latitude_textbox.TabIndex = 1;
             this.latitude_textbox.Text = "Current latitude";
             // 
-            // textBox1
+            // current_lat
             // 
-            this.textBox1.Location = new System.Drawing.Point(123, 95);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(186, 22);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.current_lat.Location = new System.Drawing.Point(123, 95);
+            this.current_lat.Name = "current_lat";
+            this.current_lat.Size = new System.Drawing.Size(186, 22);
+            this.current_lat.TabIndex = 0;
             // 
-            // textBox2
+            // current_lon
             // 
-            this.textBox2.Location = new System.Drawing.Point(123, 126);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(186, 22);
-            this.textBox2.TabIndex = 2;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.current_lon.Location = new System.Drawing.Point(123, 126);
+            this.current_lon.Name = "current_lon";
+            this.current_lon.Size = new System.Drawing.Size(186, 22);
+            this.current_lon.TabIndex = 2;
             // 
             // groupBox2
             // 
@@ -507,9 +506,9 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label latitude_textbox;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox current_lat;
         private System.Windows.Forms.Label longitude_textbox;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox current_lon;
         private System.Windows.Forms.Button goto_btn;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel3;
