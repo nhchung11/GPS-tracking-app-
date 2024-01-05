@@ -34,18 +34,15 @@ namespace MyApp
         int currentPathIndex = 0;
         string waypoint_latitude;
         string waypoint_longitude;
-        string current_latitude;
-        string current_longitude;
 
         double compass_angle = 0;
 
         bool loc1_check = false;
-        bool loc2_check = false;    
+        bool loc2_check = false;
         bool loc3_check = false;
-        bool loc4_check = false;    
+        bool loc4_check = false;
         bool loc5_check = false;
 
-        private string previousData = string.Empty;
         public Form1()
         {
             InitializeComponent();
@@ -64,7 +61,7 @@ namespace MyApp
             gmap.Dock = DockStyle.Fill;
             gmap.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
-            
+
             markersOverlay = new GMapOverlay("markers");
             gmap.Overlays.Add(markersOverlay);
             string[] ports = SerialPort.GetPortNames();
@@ -72,6 +69,7 @@ namespace MyApp
             gmap.ShowCenter = false;
             gmap.MinZoom = 1;
             gmap.MaxZoom = 20;
+            gmap.Position = new PointLatLng(21.0038676, 105.8405393);
             gmap.Zoom = 10;
             gmap.CanDragMap = true;
             gmap.DragButton = MouseButtons.Left;
@@ -79,8 +77,14 @@ namespace MyApp
             gmap.MouseClick += MyApp_Mouseclick;
             gmap.Position = new PointLatLng(21, 105);
             compass_picturebox.Image = Compass.DrawCompass(145, 0, 80, 0, 80, compass_picturebox.Size);
-
-            movingMarker = new GMarkerGoogle(new PointLatLng(21.0407675715915, 104.888362884521), GMarkerGoogleType.arrow);
+            if (current_lat.Text != "" || current_lon.Text != "")
+            {
+                movingMarker = new GMarkerGoogle(new PointLatLng(double.Parse(current_lat.Text), double.Parse(current_lon.Text)), GMarkerGoogleType.arrow);
+            }
+            else
+            {
+                movingMarker = new GMarkerGoogle(new PointLatLng(21.0038676, 105.8405393), GMarkerGoogleType.arrow);
+            }
             markersOverlay.Markers.Add(movingMarker);
             movingRoute = new GMapRoute(new List<PointLatLng>(), "MovingRoute");
             movingRoute.Stroke = new Pen(System.Drawing.Color.Blue, 2); // Màu và độ rộng của route
@@ -238,24 +242,6 @@ namespace MyApp
                 {
                     MessageBox.Show(ex.Message);
                 }
-            }
-        }
-
-        private void add_btn_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (serialPort.IsOpen)
-                {
-                    serialPort.Write("a");
-                    Thread.Sleep(1000);
-                    serialPort.Write("b");
-                    Thread.Sleep(1000);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error sending command to Arduino: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -487,6 +473,20 @@ namespace MyApp
         private void data_receive_text_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void locate_btn_Click(object sender, EventArgs e)
+        {
+            if (current_lat.Text == "" || current_lon.Text == "")
+            {
+                gmap.Position = new PointLatLng(21.0038676, 105.8405393);
+                gmap.Zoom = 15;
+            }    
+            else
+            {
+                gmap.Position = new PointLatLng(double.Parse(current_lat.Text), double.Parse(current_lon.Text));
+                gmap.Zoom = 15;
+            }    
         }
     }
 }

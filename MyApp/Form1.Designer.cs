@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.locate_btn = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.compass_groupbox = new System.Windows.Forms.GroupBox();
@@ -40,7 +41,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.connect_to_device_btn = new System.Windows.Forms.Button();
             this.comboBox_port = new System.Windows.Forms.ComboBox();
-            this.data_receive_text = new System.Windows.Forms.TextBox();
             this.goto_btn = new System.Windows.Forms.Button();
             this.longitude_textbox = new System.Windows.Forms.Label();
             this.latitude_textbox = new System.Windows.Forms.Label();
@@ -64,7 +64,6 @@
             this.waypoint3_text = new System.Windows.Forms.TextBox();
             this.waypoint3 = new System.Windows.Forms.Label();
             this.allwaypoint_del = new System.Windows.Forms.Button();
-            this.add_btn = new System.Windows.Forms.Button();
             this.waypoint1_text = new System.Windows.Forms.TextBox();
             this.waypoint2_text = new System.Windows.Forms.TextBox();
             this.waypoint_lon = new System.Windows.Forms.Label();
@@ -82,6 +81,7 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.locate_btn);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.compass_groupbox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -89,6 +89,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1070, 811);
             this.panel1.TabIndex = 0;
+            // 
+            // locate_btn
+            // 
+            this.locate_btn.Location = new System.Drawing.Point(977, 242);
+            this.locate_btn.Name = "locate_btn";
+            this.locate_btn.Size = new System.Drawing.Size(75, 23);
+            this.locate_btn.TabIndex = 3;
+            this.locate_btn.Text = "Locate";
+            this.locate_btn.UseVisualStyleBackColor = true;
+            this.locate_btn.Click += new System.EventHandler(this.locate_btn_Click);
             // 
             // panel3
             // 
@@ -142,15 +152,13 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.connect_to_device_btn);
             this.groupBox1.Controls.Add(this.comboBox_port);
-            this.groupBox1.Controls.Add(this.data_receive_text);
-            this.groupBox1.Controls.Add(this.goto_btn);
             this.groupBox1.Controls.Add(this.longitude_textbox);
             this.groupBox1.Controls.Add(this.latitude_textbox);
             this.groupBox1.Controls.Add(this.current_lat);
             this.groupBox1.Controls.Add(this.current_lon);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(315, 245);
+            this.groupBox1.Size = new System.Drawing.Size(315, 173);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Device ";
@@ -192,17 +200,9 @@
             this.comboBox_port.Size = new System.Drawing.Size(122, 24);
             this.comboBox_port.TabIndex = 13;
             // 
-            // data_receive_text
-            // 
-            this.data_receive_text.Location = new System.Drawing.Point(4, 202);
-            this.data_receive_text.Name = "data_receive_text";
-            this.data_receive_text.Size = new System.Drawing.Size(294, 22);
-            this.data_receive_text.TabIndex = 12;
-            this.data_receive_text.TextChanged += new System.EventHandler(this.data_receive_text_TextChanged);
-            // 
             // goto_btn
             // 
-            this.goto_btn.Location = new System.Drawing.Point(4, 173);
+            this.goto_btn.Location = new System.Drawing.Point(6, 192);
             this.goto_btn.Name = "goto_btn";
             this.goto_btn.Size = new System.Drawing.Size(75, 23);
             this.goto_btn.TabIndex = 4;
@@ -249,6 +249,7 @@
             this.groupBox2.Controls.Add(this.waypoint3_del);
             this.groupBox2.Controls.Add(this.waypoint2_del);
             this.groupBox2.Controls.Add(this.waypoint1_del);
+            this.groupBox2.Controls.Add(this.goto_btn);
             this.groupBox2.Controls.Add(this.add5);
             this.groupBox2.Controls.Add(this.add4);
             this.groupBox2.Controls.Add(this.add3);
@@ -261,21 +262,20 @@
             this.groupBox2.Controls.Add(this.waypoint3_text);
             this.groupBox2.Controls.Add(this.waypoint3);
             this.groupBox2.Controls.Add(this.allwaypoint_del);
-            this.groupBox2.Controls.Add(this.add_btn);
             this.groupBox2.Controls.Add(this.waypoint1_text);
             this.groupBox2.Controls.Add(this.waypoint2_text);
             this.groupBox2.Controls.Add(this.waypoint_lon);
             this.groupBox2.Controls.Add(this.waypoint1);
-            this.groupBox2.Location = new System.Drawing.Point(12, 270);
+            this.groupBox2.Location = new System.Drawing.Point(12, 191);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(315, 529);
+            this.groupBox2.Size = new System.Drawing.Size(315, 608);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Set waypoint";
             // 
             // waypoint5_del
             // 
-            this.waypoint5_del.Location = new System.Drawing.Point(282, 220);
+            this.waypoint5_del.Location = new System.Drawing.Point(283, 153);
             this.waypoint5_del.Name = "waypoint5_del";
             this.waypoint5_del.Size = new System.Drawing.Size(26, 23);
             this.waypoint5_del.TabIndex = 27;
@@ -285,7 +285,7 @@
             // 
             // waypoint4_del
             // 
-            this.waypoint4_del.Location = new System.Drawing.Point(282, 183);
+            this.waypoint4_del.Location = new System.Drawing.Point(283, 117);
             this.waypoint4_del.Name = "waypoint4_del";
             this.waypoint4_del.Size = new System.Drawing.Size(26, 23);
             this.waypoint4_del.TabIndex = 26;
@@ -295,7 +295,7 @@
             // 
             // waypoint3_del
             // 
-            this.waypoint3_del.Location = new System.Drawing.Point(282, 143);
+            this.waypoint3_del.Location = new System.Drawing.Point(282, 85);
             this.waypoint3_del.Name = "waypoint3_del";
             this.waypoint3_del.Size = new System.Drawing.Size(26, 23);
             this.waypoint3_del.TabIndex = 25;
@@ -305,7 +305,7 @@
             // 
             // waypoint2_del
             // 
-            this.waypoint2_del.Location = new System.Drawing.Point(282, 106);
+            this.waypoint2_del.Location = new System.Drawing.Point(282, 55);
             this.waypoint2_del.Name = "waypoint2_del";
             this.waypoint2_del.Size = new System.Drawing.Size(26, 23);
             this.waypoint2_del.TabIndex = 24;
@@ -315,7 +315,7 @@
             // 
             // waypoint1_del
             // 
-            this.waypoint1_del.Location = new System.Drawing.Point(283, 66);
+            this.waypoint1_del.Location = new System.Drawing.Point(283, 26);
             this.waypoint1_del.Name = "waypoint1_del";
             this.waypoint1_del.Size = new System.Drawing.Size(26, 23);
             this.waypoint1_del.TabIndex = 23;
@@ -325,7 +325,7 @@
             // 
             // add5
             // 
-            this.add5.Location = new System.Drawing.Point(258, 220);
+            this.add5.Location = new System.Drawing.Point(258, 153);
             this.add5.Name = "add5";
             this.add5.Size = new System.Drawing.Size(26, 23);
             this.add5.TabIndex = 22;
@@ -335,7 +335,7 @@
             // 
             // add4
             // 
-            this.add4.Location = new System.Drawing.Point(258, 183);
+            this.add4.Location = new System.Drawing.Point(258, 117);
             this.add4.Name = "add4";
             this.add4.Size = new System.Drawing.Size(26, 23);
             this.add4.TabIndex = 21;
@@ -345,7 +345,7 @@
             // 
             // add3
             // 
-            this.add3.Location = new System.Drawing.Point(258, 143);
+            this.add3.Location = new System.Drawing.Point(258, 85);
             this.add3.Name = "add3";
             this.add3.Size = new System.Drawing.Size(26, 23);
             this.add3.TabIndex = 20;
@@ -355,7 +355,7 @@
             // 
             // add2
             // 
-            this.add2.Location = new System.Drawing.Point(258, 106);
+            this.add2.Location = new System.Drawing.Point(258, 55);
             this.add2.Name = "add2";
             this.add2.Size = new System.Drawing.Size(26, 23);
             this.add2.TabIndex = 19;
@@ -365,7 +365,7 @@
             // 
             // add1
             // 
-            this.add1.Location = new System.Drawing.Point(258, 66);
+            this.add1.Location = new System.Drawing.Point(258, 26);
             this.add1.Name = "add1";
             this.add1.Size = new System.Drawing.Size(26, 23);
             this.add1.TabIndex = 18;
@@ -375,7 +375,7 @@
             // 
             // waypoint5_text
             // 
-            this.waypoint5_text.Location = new System.Drawing.Point(95, 220);
+            this.waypoint5_text.Location = new System.Drawing.Point(95, 153);
             this.waypoint5_text.Name = "waypoint5_text";
             this.waypoint5_text.Size = new System.Drawing.Size(157, 22);
             this.waypoint5_text.TabIndex = 17;
@@ -383,7 +383,7 @@
             // waypoint5
             // 
             this.waypoint5.AutoSize = true;
-            this.waypoint5.Location = new System.Drawing.Point(10, 223);
+            this.waypoint5.Location = new System.Drawing.Point(7, 156);
             this.waypoint5.Name = "waypoint5";
             this.waypoint5.Size = new System.Drawing.Size(74, 16);
             this.waypoint5.TabIndex = 16;
@@ -391,7 +391,7 @@
             // 
             // waypoint4_text
             // 
-            this.waypoint4_text.Location = new System.Drawing.Point(95, 183);
+            this.waypoint4_text.Location = new System.Drawing.Point(95, 118);
             this.waypoint4_text.Name = "waypoint4_text";
             this.waypoint4_text.Size = new System.Drawing.Size(157, 22);
             this.waypoint4_text.TabIndex = 15;
@@ -399,7 +399,7 @@
             // waypoint4
             // 
             this.waypoint4.AutoSize = true;
-            this.waypoint4.Location = new System.Drawing.Point(10, 186);
+            this.waypoint4.Location = new System.Drawing.Point(6, 121);
             this.waypoint4.Name = "waypoint4";
             this.waypoint4.Size = new System.Drawing.Size(74, 16);
             this.waypoint4.TabIndex = 14;
@@ -407,7 +407,7 @@
             // 
             // waypoint3_text
             // 
-            this.waypoint3_text.Location = new System.Drawing.Point(95, 143);
+            this.waypoint3_text.Location = new System.Drawing.Point(95, 85);
             this.waypoint3_text.Name = "waypoint3_text";
             this.waypoint3_text.Size = new System.Drawing.Size(157, 22);
             this.waypoint3_text.TabIndex = 13;
@@ -415,7 +415,7 @@
             // waypoint3
             // 
             this.waypoint3.AutoSize = true;
-            this.waypoint3.Location = new System.Drawing.Point(7, 149);
+            this.waypoint3.Location = new System.Drawing.Point(6, 88);
             this.waypoint3.Name = "waypoint3";
             this.waypoint3.Size = new System.Drawing.Size(74, 16);
             this.waypoint3.TabIndex = 12;
@@ -423,7 +423,7 @@
             // 
             // allwaypoint_del
             // 
-            this.allwaypoint_del.Location = new System.Drawing.Point(10, 253);
+            this.allwaypoint_del.Location = new System.Drawing.Point(123, 192);
             this.allwaypoint_del.Name = "allwaypoint_del";
             this.allwaypoint_del.Size = new System.Drawing.Size(75, 23);
             this.allwaypoint_del.TabIndex = 11;
@@ -431,26 +431,16 @@
             this.allwaypoint_del.UseVisualStyleBackColor = true;
             this.allwaypoint_del.Click += new System.EventHandler(this.allwaypoint_del_Click);
             // 
-            // add_btn
-            // 
-            this.add_btn.Location = new System.Drawing.Point(9, 21);
-            this.add_btn.Name = "add_btn";
-            this.add_btn.Size = new System.Drawing.Size(121, 23);
-            this.add_btn.TabIndex = 6;
-            this.add_btn.Text = "Add";
-            this.add_btn.UseVisualStyleBackColor = true;
-            this.add_btn.Click += new System.EventHandler(this.add_btn_Click);
-            // 
             // waypoint1_text
             // 
-            this.waypoint1_text.Location = new System.Drawing.Point(95, 66);
+            this.waypoint1_text.Location = new System.Drawing.Point(95, 26);
             this.waypoint1_text.Name = "waypoint1_text";
             this.waypoint1_text.Size = new System.Drawing.Size(157, 22);
             this.waypoint1_text.TabIndex = 9;
             // 
             // waypoint2_text
             // 
-            this.waypoint2_text.Location = new System.Drawing.Point(95, 106);
+            this.waypoint2_text.Location = new System.Drawing.Point(95, 55);
             this.waypoint2_text.Name = "waypoint2_text";
             this.waypoint2_text.Size = new System.Drawing.Size(157, 22);
             this.waypoint2_text.TabIndex = 10;
@@ -458,7 +448,7 @@
             // waypoint_lon
             // 
             this.waypoint_lon.AutoSize = true;
-            this.waypoint_lon.Location = new System.Drawing.Point(7, 109);
+            this.waypoint_lon.Location = new System.Drawing.Point(6, 58);
             this.waypoint_lon.Name = "waypoint_lon";
             this.waypoint_lon.Size = new System.Drawing.Size(74, 16);
             this.waypoint_lon.TabIndex = 8;
@@ -467,7 +457,7 @@
             // waypoint1
             // 
             this.waypoint1.AutoSize = true;
-            this.waypoint1.Location = new System.Drawing.Point(7, 72);
+            this.waypoint1.Location = new System.Drawing.Point(7, 29);
             this.waypoint1.Name = "waypoint1";
             this.waypoint1.Size = new System.Drawing.Size(74, 16);
             this.waypoint1.TabIndex = 7;
@@ -512,7 +502,6 @@
         private System.Windows.Forms.Button goto_btn;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button add_btn;
         private System.Windows.Forms.Label waypoint_lon;
         private System.Windows.Forms.Label waypoint1;
         private System.Windows.Forms.TextBox waypoint1_text;
@@ -524,7 +513,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button disconnect_btn;
-        private System.Windows.Forms.TextBox data_receive_text;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button allwaypoint_del;
         private System.Windows.Forms.PictureBox compass_picturebox;
@@ -545,6 +533,7 @@
         private System.Windows.Forms.Button add3;
         private System.Windows.Forms.Button add2;
         private System.Windows.Forms.Button add1;
+        private System.Windows.Forms.Button locate_btn;
     }
 }
 
