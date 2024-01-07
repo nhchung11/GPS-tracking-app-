@@ -152,14 +152,18 @@ namespace MyApp
             {
                 // Read the entire line of data from the serial port
                 string receivedData = serialPort.ReadLine();
-                string[] loc = receivedData.Split(' ');
-                // Update the TextBox on the UI thread
-                Invoke((MethodInvoker)delegate
+                string[] splitData = receivedData.Split(' ');
+
+                // Ensure that we have at least two strings
+                if (splitData.Length >= 2)
                 {
-                    // Process or display the received data as needed
-                    current_lon.Text = loc[1];
-                    current_lat.Text = loc[0];
-                });
+                    // Update the TextBoxes on the UI thread
+                    this.Invoke((MethodInvoker)delegate {
+                        current_lat.Text = splitData[0];
+                        current_lon.Text = splitData[1];
+                    });
+                }
+                // Console.WriteLine(receivedData);
             }
             catch (Exception ex)
             {
@@ -486,6 +490,7 @@ namespace MyApp
             {
                 gmap.Position = new PointLatLng(double.Parse(current_lat.Text), double.Parse(current_lon.Text));
                 gmap.Zoom = 15;
+                movingMarker.Position = new PointLatLng(double.Parse(current_lat.Text), double.Parse(current_lon.Text));
             }    
         }
     }
