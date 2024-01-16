@@ -36,6 +36,8 @@ namespace MyApp
         string waypoint_longitude;
 
         double compass_angle = 0;
+        double cur_lat = 0;
+        double cur_lon = 0;
 
         bool loc1_check = false;
         bool loc2_check = false;
@@ -76,7 +78,7 @@ namespace MyApp
             panel1.Controls.Add(gmap);
             gmap.MouseClick += MyApp_Mouseclick;
             gmap.Position = new PointLatLng(21, 105);
-            compass_picturebox.Image = Compass.DrawCompass(145, 0, 80, 0, 80, compass_picturebox.Size);
+            compass_picturebox.Image = Compass.DrawCompass(compass_angle, 0, 80, 0, 80, compass_picturebox.Size);
             if (current_lat.Text != "" || current_lon.Text != "")
             {
                 movingMarker = new GMarkerGoogle(new PointLatLng(double.Parse(current_lat.Text), double.Parse(current_lon.Text)), GMarkerGoogleType.arrow);
@@ -160,7 +162,10 @@ namespace MyApp
                     // Update the TextBoxes on the UI thread
                     this.Invoke((MethodInvoker)delegate {
                         current_lat.Text = splitData[0];
+                        cur_lat = double.Parse(splitData[0]);
                         current_lon.Text = splitData[1];
+                        cur_lon = double.Parse(splitData[1]);
+                        compass_angle = double.Parse(splitData[2]); 
                     });
                 }
                 // Console.WriteLine(receivedData);
