@@ -41,7 +41,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.connect_to_device_btn = new System.Windows.Forms.Button();
             this.comboBox_port = new System.Windows.Forms.ComboBox();
-            this.goto_btn = new System.Windows.Forms.Button();
             this.longitude_textbox = new System.Windows.Forms.Label();
             this.latitude_textbox = new System.Windows.Forms.Label();
             this.current_lat = new System.Windows.Forms.TextBox();
@@ -52,6 +51,7 @@
             this.waypoint3_del = new System.Windows.Forms.Button();
             this.waypoint2_del = new System.Windows.Forms.Button();
             this.waypoint1_del = new System.Windows.Forms.Button();
+            this.goto_btn = new System.Windows.Forms.Button();
             this.add5 = new System.Windows.Forms.Button();
             this.add4 = new System.Windows.Forms.Button();
             this.add3 = new System.Windows.Forms.Button();
@@ -69,6 +69,12 @@
             this.waypoint_lon = new System.Windows.Forms.Label();
             this.waypoint1 = new System.Windows.Forms.Label();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.forward_btn = new System.Windows.Forms.Button();
+            this.stop_btn = new System.Windows.Forms.Button();
+            this.backward_btn = new System.Windows.Forms.Button();
+            this.left_btn = new System.Windows.Forms.Button();
+            this.right_btn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.compass_groupbox.SuspendLayout();
@@ -76,6 +82,7 @@
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -200,16 +207,6 @@
             this.comboBox_port.Size = new System.Drawing.Size(122, 24);
             this.comboBox_port.TabIndex = 13;
             // 
-            // goto_btn
-            // 
-            this.goto_btn.Location = new System.Drawing.Point(6, 192);
-            this.goto_btn.Name = "goto_btn";
-            this.goto_btn.Size = new System.Drawing.Size(75, 23);
-            this.goto_btn.TabIndex = 4;
-            this.goto_btn.Text = "Go to";
-            this.goto_btn.UseVisualStyleBackColor = true;
-            this.goto_btn.Click += new System.EventHandler(this.goto_btn_Click);
-            // 
             // longitude_textbox
             // 
             this.longitude_textbox.AutoSize = true;
@@ -244,6 +241,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Controls.Add(this.waypoint5_del);
             this.groupBox2.Controls.Add(this.waypoint4_del);
             this.groupBox2.Controls.Add(this.waypoint3_del);
@@ -322,6 +320,16 @@
             this.waypoint1_del.Text = "-";
             this.waypoint1_del.UseVisualStyleBackColor = true;
             this.waypoint1_del.Click += new System.EventHandler(this.del1_Click);
+            // 
+            // goto_btn
+            // 
+            this.goto_btn.Location = new System.Drawing.Point(6, 192);
+            this.goto_btn.Name = "goto_btn";
+            this.goto_btn.Size = new System.Drawing.Size(75, 23);
+            this.goto_btn.TabIndex = 4;
+            this.goto_btn.Text = "Go to";
+            this.goto_btn.UseVisualStyleBackColor = true;
+            this.goto_btn.Click += new System.EventHandler(this.goto_btn_Click);
             // 
             // add5
             // 
@@ -468,6 +476,70 @@
             this.serialPort.PortName = "COM3";
             this.serialPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort_DataReceived_1);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.right_btn);
+            this.groupBox4.Controls.Add(this.left_btn);
+            this.groupBox4.Controls.Add(this.backward_btn);
+            this.groupBox4.Controls.Add(this.stop_btn);
+            this.groupBox4.Controls.Add(this.forward_btn);
+            this.groupBox4.Location = new System.Drawing.Point(10, 222);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(298, 260);
+            this.groupBox4.TabIndex = 28;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Manual control";
+            // 
+            // forward_btn
+            // 
+            this.forward_btn.Location = new System.Drawing.Point(85, 32);
+            this.forward_btn.Name = "forward_btn";
+            this.forward_btn.Size = new System.Drawing.Size(127, 44);
+            this.forward_btn.TabIndex = 0;
+            this.forward_btn.Text = "forward";
+            this.forward_btn.UseVisualStyleBackColor = true;
+            this.forward_btn.Click += new System.EventHandler(this.forward_btn_Click);
+            // 
+            // stop_btn
+            // 
+            this.stop_btn.Location = new System.Drawing.Point(113, 111);
+            this.stop_btn.Name = "stop_btn";
+            this.stop_btn.Size = new System.Drawing.Size(75, 28);
+            this.stop_btn.TabIndex = 1;
+            this.stop_btn.Text = "Stop";
+            this.stop_btn.UseVisualStyleBackColor = true;
+            this.stop_btn.Click += new System.EventHandler(this.stop_btn_Click);
+            // 
+            // backward_btn
+            // 
+            this.backward_btn.Location = new System.Drawing.Point(85, 173);
+            this.backward_btn.Name = "backward_btn";
+            this.backward_btn.Size = new System.Drawing.Size(127, 44);
+            this.backward_btn.TabIndex = 2;
+            this.backward_btn.Text = "Backward";
+            this.backward_btn.UseVisualStyleBackColor = true;
+            this.backward_btn.Click += new System.EventHandler(this.backward_btn_Click);
+            // 
+            // left_btn
+            // 
+            this.left_btn.Location = new System.Drawing.Point(7, 77);
+            this.left_btn.Name = "left_btn";
+            this.left_btn.Size = new System.Drawing.Size(64, 97);
+            this.left_btn.TabIndex = 3;
+            this.left_btn.Text = "Left";
+            this.left_btn.UseVisualStyleBackColor = true;
+            this.left_btn.Click += new System.EventHandler(this.left_btn_Click);
+            // 
+            // right_btn
+            // 
+            this.right_btn.Location = new System.Drawing.Point(228, 77);
+            this.right_btn.Name = "right_btn";
+            this.right_btn.Size = new System.Drawing.Size(64, 97);
+            this.right_btn.TabIndex = 4;
+            this.right_btn.Text = "Right";
+            this.right_btn.UseVisualStyleBackColor = true;
+            this.right_btn.Click += new System.EventHandler(this.right_btn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -487,6 +559,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -534,6 +607,12 @@
         private System.Windows.Forms.Button add2;
         private System.Windows.Forms.Button add1;
         private System.Windows.Forms.Button locate_btn;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button stop_btn;
+        private System.Windows.Forms.Button forward_btn;
+        private System.Windows.Forms.Button right_btn;
+        private System.Windows.Forms.Button left_btn;
+        private System.Windows.Forms.Button backward_btn;
     }
 }
 

@@ -16,6 +16,7 @@ using GMap.NET.Internals;
 using GMap.NET.WindowsForms.Markers;
 using System.Threading;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Diagnostics;
 
 namespace MyApp
 {
@@ -44,6 +45,8 @@ namespace MyApp
         bool loc3_check = false;
         bool loc4_check = false;
         bool loc5_check = false;
+
+        double[] headings = new double[5];
 
         public Form1()
         {
@@ -78,7 +81,7 @@ namespace MyApp
             panel1.Controls.Add(gmap);
             gmap.MouseClick += MyApp_Mouseclick;
             gmap.Position = new PointLatLng(21, 105);
-            compass_picturebox.Image = Compass.DrawCompass(compass_angle, 0, 80, 0, 80, compass_picturebox.Size);
+            compass_picturebox.Image = Compass.DrawCompass(145.0, 0, 80, 0, 80, compass_picturebox.Size);
             if (current_lat.Text != "" || current_lon.Text != "")
             {
                 movingMarker = new GMarkerGoogle(new PointLatLng(double.Parse(current_lat.Text), double.Parse(current_lon.Text)), GMarkerGoogleType.arrow);
@@ -142,9 +145,18 @@ namespace MyApp
             currentPathIndex = 0;
             lastMoveTime = DateTime.Now;
             moveTimer.Start();
+            int i = 0;
             foreach (var point in pathPoints)
             {
-                Console.WriteLine($"Latitude: {point.Lat}, Longitude: {point.Lng}");
+                Debug.WriteLine($"Latitude: {point.Lat}, Longitude: {point.Lng}");
+                double deltaLng = point.Lng - cur_lon;
+                double y = Math.Sin(deltaLng) * Math.Sin(point.Lat);
+                double x = Math.Cos(cur_lat) * Math.Sin(point.Lat) - Math.Sin(cur_lat) * Math.Cos(point.Lat) * Math.Cos(deltaLng);
+                headings[i] = Math.Atan2(y, x) * (180.0 / Math.PI);
+                headings[i] = (headings[i] + 360) % 360;
+                Debug.Write("heading: ");
+                Debug.WriteLine(headings[i]);
+                i++;
             }
         }
 
@@ -165,14 +177,14 @@ namespace MyApp
                         cur_lat = double.Parse(splitData[0]);
                         current_lon.Text = splitData[1];
                         cur_lon = double.Parse(splitData[1]);
-                        compass_angle = double.Parse(splitData[2]); 
+                        //compass_angle = double.Parse(splitData[2]); 
                     });
                 }
                 // Console.WriteLine(receivedData);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error reading data: {ex.Message}");
+                Debug.WriteLine($"Error reading data: {ex.Message}");
             }
         }
 
@@ -476,12 +488,7 @@ namespace MyApp
             waypoint5_text.Text = null;
             waypoint5_text.Enabled = true;
             loc5_check = false;
-
-        }
-
-        private void data_receive_text_TextChanged(object sender, EventArgs e)
-        {
-
+            Debug.WriteLine("Delete all");
         }
 
         private void locate_btn_Click(object sender, EventArgs e)
@@ -497,6 +504,80 @@ namespace MyApp
                 gmap.Zoom = 15;
                 movingMarker.Position = new PointLatLng(double.Parse(current_lat.Text), double.Parse(current_lon.Text));
             }    
+        }
+
+
+        // Arduino control
+        private void stop()
+        {
+            if (serialPort.IsOpen)
+            {
+                serialPort.Write("0");      // 0: STOP
+            }
+        }
+        private void forward()
+        {
+            if (serialPort.IsOpen)
+            {
+                serialPort.Write("1");      // 1: FORWARD
+            }
+        }
+
+        private void left()
+        {
+            if (serialPort.IsOpen)
+            {
+                serialPort.Write("2");      // 2: LEFT
+            }
+        }
+        private void right()
+        {
+            if(serialPort.IsOpen)
+            {
+                serialPort.Write("3");      // 3: RIGHT
+            }
+        }
+        private void backward()
+        {
+            if (serialPort.IsOpen)
+            {
+                serialPort.Write("4");      // 4: BACKWARD
+            }
+        }
+
+        private void forward_btn_Click(object sender, EventArgs e)
+        {
+            forward();
+            Debug.WriteLine("forward");
+            System.Threading.Thread.Sleep(1000);
+        }
+
+        private void stop_btn_Click(object sender, EventArgs e)
+        {
+            stop();
+            Debug.WriteLine("stop");
+            System.Threading.Thread.Sleep(1000);
+        }
+
+        private void backward_btn_Click(object sender, EventArgs e)
+        {
+            backward();
+            Debug.WriteLine("backward");
+            System.Threading.Thread.Sleep(1000);
+        }
+
+        private void left_btn_Click(object sender, EventArgs e)
+        {
+            left();
+            Debug.WriteLine("left");
+            System.Threading.Thread.Sleep(1000);
+        }
+
+        private void right_btn_Click(object sender, EventArgs e)
+        {
+            right();
+            Debug.WriteLine("right");
+            System.Threading.Thread.Sleep(1000);
         }
     }
 }
