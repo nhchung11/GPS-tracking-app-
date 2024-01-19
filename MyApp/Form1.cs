@@ -36,7 +36,7 @@ namespace MyApp
         string waypoint_latitude;
         string waypoint_longitude;
 
-        double compass_angle = 0;
+        double compass_angle = 180;
         double cur_lat = 0;
         double cur_lon = 0;
 
@@ -81,7 +81,7 @@ namespace MyApp
             panel1.Controls.Add(gmap);
             gmap.MouseClick += MyApp_Mouseclick;
             gmap.Position = new PointLatLng(21, 105);
-            compass_picturebox.Image = Compass.DrawCompass(145.0, 0, 80, 0, 80, compass_picturebox.Size);
+            compass_picturebox.Image = Compass.DrawCompass(compass_angle, 0, 80, 0, 80, compass_picturebox.Size);
             if (current_lat.Text != "" || current_lon.Text != "")
             {
                 movingMarker = new GMarkerGoogle(new PointLatLng(double.Parse(current_lat.Text), double.Parse(current_lon.Text)), GMarkerGoogleType.arrow);
@@ -156,6 +156,7 @@ namespace MyApp
                 headings[i] = (headings[i] + 360) % 360;
                 Debug.Write("heading: ");
                 Debug.WriteLine(headings[i]);
+                Debug.WriteLine(compass_angle);
                 i++;
             }
         }
@@ -177,7 +178,9 @@ namespace MyApp
                         cur_lat = double.Parse(splitData[0]);
                         current_lon.Text = splitData[1];
                         cur_lon = double.Parse(splitData[1]);
-                        //compass_angle = double.Parse(splitData[2]); 
+                        compass_angle = double.Parse(splitData[2]);
+                        heading.Text = splitData[2];
+                        compass_picturebox.Image = Compass.DrawCompass(compass_angle, 0, 80, 0, 80, compass_picturebox.Size);
                     });
                 }
                 // Console.WriteLine(receivedData);

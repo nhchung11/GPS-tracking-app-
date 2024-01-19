@@ -37,6 +37,8 @@
             this.compass_picturebox = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.heading_label = new System.Windows.Forms.Label();
+            this.heading = new System.Windows.Forms.TextBox();
             this.disconnect_btn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.connect_to_device_btn = new System.Windows.Forms.Button();
@@ -46,6 +48,12 @@
             this.current_lat = new System.Windows.Forms.TextBox();
             this.current_lon = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.right_btn = new System.Windows.Forms.Button();
+            this.left_btn = new System.Windows.Forms.Button();
+            this.backward_btn = new System.Windows.Forms.Button();
+            this.stop_btn = new System.Windows.Forms.Button();
+            this.forward_btn = new System.Windows.Forms.Button();
             this.waypoint5_del = new System.Windows.Forms.Button();
             this.waypoint4_del = new System.Windows.Forms.Button();
             this.waypoint3_del = new System.Windows.Forms.Button();
@@ -69,12 +77,6 @@
             this.waypoint_lon = new System.Windows.Forms.Label();
             this.waypoint1 = new System.Windows.Forms.Label();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.forward_btn = new System.Windows.Forms.Button();
-            this.stop_btn = new System.Windows.Forms.Button();
-            this.backward_btn = new System.Windows.Forms.Button();
-            this.left_btn = new System.Windows.Forms.Button();
-            this.right_btn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.compass_groupbox.SuspendLayout();
@@ -99,7 +101,7 @@
             // 
             // locate_btn
             // 
-            this.locate_btn.Location = new System.Drawing.Point(977, 242);
+            this.locate_btn.Location = new System.Drawing.Point(983, 287);
             this.locate_btn.Name = "locate_btn";
             this.locate_btn.Size = new System.Drawing.Size(75, 23);
             this.locate_btn.TabIndex = 3;
@@ -128,18 +130,18 @@
             // compass_groupbox
             // 
             this.compass_groupbox.Controls.Add(this.compass_picturebox);
-            this.compass_groupbox.Location = new System.Drawing.Point(786, 3);
+            this.compass_groupbox.Location = new System.Drawing.Point(737, 3);
             this.compass_groupbox.Name = "compass_groupbox";
-            this.compass_groupbox.Size = new System.Drawing.Size(272, 233);
+            this.compass_groupbox.Size = new System.Drawing.Size(321, 278);
             this.compass_groupbox.TabIndex = 2;
             this.compass_groupbox.TabStop = false;
             this.compass_groupbox.Text = "Compass ";
             // 
             // compass_picturebox
             // 
-            this.compass_picturebox.Location = new System.Drawing.Point(6, 16);
+            this.compass_picturebox.Location = new System.Drawing.Point(6, 21);
             this.compass_picturebox.Name = "compass_picturebox";
-            this.compass_picturebox.Size = new System.Drawing.Size(260, 211);
+            this.compass_picturebox.Size = new System.Drawing.Size(309, 251);
             this.compass_picturebox.TabIndex = 1;
             this.compass_picturebox.TabStop = false;
             // 
@@ -155,6 +157,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.heading_label);
+            this.groupBox1.Controls.Add(this.heading);
             this.groupBox1.Controls.Add(this.disconnect_btn);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.connect_to_device_btn);
@@ -165,10 +169,26 @@
             this.groupBox1.Controls.Add(this.current_lon);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(315, 173);
+            this.groupBox1.Size = new System.Drawing.Size(315, 198);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Device ";
+            // 
+            // heading_label
+            // 
+            this.heading_label.AutoSize = true;
+            this.heading_label.Location = new System.Drawing.Point(6, 157);
+            this.heading_label.Name = "heading_label";
+            this.heading_label.Size = new System.Drawing.Size(59, 16);
+            this.heading_label.TabIndex = 17;
+            this.heading_label.Text = "Heading";
+            // 
+            // heading
+            // 
+            this.heading.Location = new System.Drawing.Point(122, 154);
+            this.heading.Name = "heading";
+            this.heading.Size = new System.Drawing.Size(186, 22);
+            this.heading.TabIndex = 16;
             // 
             // disconnect_btn
             // 
@@ -264,12 +284,76 @@
             this.groupBox2.Controls.Add(this.waypoint2_text);
             this.groupBox2.Controls.Add(this.waypoint_lon);
             this.groupBox2.Controls.Add(this.waypoint1);
-            this.groupBox2.Location = new System.Drawing.Point(12, 191);
+            this.groupBox2.Location = new System.Drawing.Point(12, 216);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(315, 608);
+            this.groupBox2.Size = new System.Drawing.Size(315, 583);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Set waypoint";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.right_btn);
+            this.groupBox4.Controls.Add(this.left_btn);
+            this.groupBox4.Controls.Add(this.backward_btn);
+            this.groupBox4.Controls.Add(this.stop_btn);
+            this.groupBox4.Controls.Add(this.forward_btn);
+            this.groupBox4.Location = new System.Drawing.Point(10, 222);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(298, 260);
+            this.groupBox4.TabIndex = 28;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Manual control";
+            // 
+            // right_btn
+            // 
+            this.right_btn.Location = new System.Drawing.Point(228, 77);
+            this.right_btn.Name = "right_btn";
+            this.right_btn.Size = new System.Drawing.Size(64, 97);
+            this.right_btn.TabIndex = 4;
+            this.right_btn.Text = "Right";
+            this.right_btn.UseVisualStyleBackColor = true;
+            this.right_btn.Click += new System.EventHandler(this.right_btn_Click);
+            // 
+            // left_btn
+            // 
+            this.left_btn.Location = new System.Drawing.Point(7, 77);
+            this.left_btn.Name = "left_btn";
+            this.left_btn.Size = new System.Drawing.Size(64, 97);
+            this.left_btn.TabIndex = 3;
+            this.left_btn.Text = "Left";
+            this.left_btn.UseVisualStyleBackColor = true;
+            this.left_btn.Click += new System.EventHandler(this.left_btn_Click);
+            // 
+            // backward_btn
+            // 
+            this.backward_btn.Location = new System.Drawing.Point(85, 173);
+            this.backward_btn.Name = "backward_btn";
+            this.backward_btn.Size = new System.Drawing.Size(127, 44);
+            this.backward_btn.TabIndex = 2;
+            this.backward_btn.Text = "Backward";
+            this.backward_btn.UseVisualStyleBackColor = true;
+            this.backward_btn.Click += new System.EventHandler(this.backward_btn_Click);
+            // 
+            // stop_btn
+            // 
+            this.stop_btn.Location = new System.Drawing.Point(113, 111);
+            this.stop_btn.Name = "stop_btn";
+            this.stop_btn.Size = new System.Drawing.Size(75, 28);
+            this.stop_btn.TabIndex = 1;
+            this.stop_btn.Text = "Stop";
+            this.stop_btn.UseVisualStyleBackColor = true;
+            this.stop_btn.Click += new System.EventHandler(this.stop_btn_Click);
+            // 
+            // forward_btn
+            // 
+            this.forward_btn.Location = new System.Drawing.Point(85, 32);
+            this.forward_btn.Name = "forward_btn";
+            this.forward_btn.Size = new System.Drawing.Size(127, 44);
+            this.forward_btn.TabIndex = 0;
+            this.forward_btn.Text = "forward";
+            this.forward_btn.UseVisualStyleBackColor = true;
+            this.forward_btn.Click += new System.EventHandler(this.forward_btn_Click);
             // 
             // waypoint5_del
             // 
@@ -476,70 +560,6 @@
             this.serialPort.PortName = "COM3";
             this.serialPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort_DataReceived_1);
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.right_btn);
-            this.groupBox4.Controls.Add(this.left_btn);
-            this.groupBox4.Controls.Add(this.backward_btn);
-            this.groupBox4.Controls.Add(this.stop_btn);
-            this.groupBox4.Controls.Add(this.forward_btn);
-            this.groupBox4.Location = new System.Drawing.Point(10, 222);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(298, 260);
-            this.groupBox4.TabIndex = 28;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Manual control";
-            // 
-            // forward_btn
-            // 
-            this.forward_btn.Location = new System.Drawing.Point(85, 32);
-            this.forward_btn.Name = "forward_btn";
-            this.forward_btn.Size = new System.Drawing.Size(127, 44);
-            this.forward_btn.TabIndex = 0;
-            this.forward_btn.Text = "forward";
-            this.forward_btn.UseVisualStyleBackColor = true;
-            this.forward_btn.Click += new System.EventHandler(this.forward_btn_Click);
-            // 
-            // stop_btn
-            // 
-            this.stop_btn.Location = new System.Drawing.Point(113, 111);
-            this.stop_btn.Name = "stop_btn";
-            this.stop_btn.Size = new System.Drawing.Size(75, 28);
-            this.stop_btn.TabIndex = 1;
-            this.stop_btn.Text = "Stop";
-            this.stop_btn.UseVisualStyleBackColor = true;
-            this.stop_btn.Click += new System.EventHandler(this.stop_btn_Click);
-            // 
-            // backward_btn
-            // 
-            this.backward_btn.Location = new System.Drawing.Point(85, 173);
-            this.backward_btn.Name = "backward_btn";
-            this.backward_btn.Size = new System.Drawing.Size(127, 44);
-            this.backward_btn.TabIndex = 2;
-            this.backward_btn.Text = "Backward";
-            this.backward_btn.UseVisualStyleBackColor = true;
-            this.backward_btn.Click += new System.EventHandler(this.backward_btn_Click);
-            // 
-            // left_btn
-            // 
-            this.left_btn.Location = new System.Drawing.Point(7, 77);
-            this.left_btn.Name = "left_btn";
-            this.left_btn.Size = new System.Drawing.Size(64, 97);
-            this.left_btn.TabIndex = 3;
-            this.left_btn.Text = "Left";
-            this.left_btn.UseVisualStyleBackColor = true;
-            this.left_btn.Click += new System.EventHandler(this.left_btn_Click);
-            // 
-            // right_btn
-            // 
-            this.right_btn.Location = new System.Drawing.Point(228, 77);
-            this.right_btn.Name = "right_btn";
-            this.right_btn.Size = new System.Drawing.Size(64, 97);
-            this.right_btn.TabIndex = 4;
-            this.right_btn.Text = "Right";
-            this.right_btn.UseVisualStyleBackColor = true;
-            this.right_btn.Click += new System.EventHandler(this.right_btn_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -613,6 +633,8 @@
         private System.Windows.Forms.Button right_btn;
         private System.Windows.Forms.Button left_btn;
         private System.Windows.Forms.Button backward_btn;
+        private System.Windows.Forms.TextBox heading;
+        private System.Windows.Forms.Label heading_label;
     }
 }
 
