@@ -88,7 +88,7 @@ namespace MyApp
             }
             else
             {
-                movingMarker = new GMarkerGoogle(new PointLatLng(21.0038676, 105.8405393), GMarkerGoogleType.arrow);
+                movingMarker = new GMarkerGoogle(new PointLatLng(21.004489, 105.8458816), GMarkerGoogleType.arrow);
             }
             markersOverlay.Markers.Add(movingMarker);
             movingRoute = new GMapRoute(new List<PointLatLng>(), "MovingRoute");
@@ -106,7 +106,7 @@ namespace MyApp
             DateTime now = DateTime.Now;
             TimeSpan elapsedTime = now - lastMoveTime;
 
-            double totalSeconds = 2.0; // Thời gian di chuyển từ một điểm đến điểm khác (ví dụ: 2 giây)
+            double totalSeconds = 5.0; // Thời gian di chuyển từ một điểm đến điểm khác (ví dụ: 2 giây)
             double progress = elapsedTime.TotalSeconds / totalSeconds;
 
             if (progress <= 1.0)
@@ -498,7 +498,7 @@ namespace MyApp
         {
             if (current_lat.Text == "" || current_lon.Text == "")
             {
-                gmap.Position = new PointLatLng(21.0038676, 105.8405393);
+                gmap.Position = new PointLatLng(21.004489, 105.8458816);
                 gmap.Zoom = 15;
             }    
             else
@@ -515,7 +515,7 @@ namespace MyApp
         {
             if (serialPort.IsOpen)
             {
-                serialPort.Write("0");      // 0: STOP
+                serialPort.Write("4");      // 0: STOP
             }
         }
         private void forward()
@@ -530,21 +530,21 @@ namespace MyApp
         {
             if (serialPort.IsOpen)
             {
-                serialPort.Write("2");      // 2: LEFT
+                serialPort.Write("3");      // 2: LEFT
             }
         }
         private void right()
         {
             if(serialPort.IsOpen)
             {
-                serialPort.Write("3");      // 3: RIGHT
+                serialPort.Write("2");      // 3: RIGHT
             }
         }
         private void backward()
         {
             if (serialPort.IsOpen)
             {
-                serialPort.Write("4");      // 4: BACKWARD
+                serialPort.Write("5");      // 4: BACKWARD
             }
         }
 
